@@ -24,6 +24,7 @@ class QuestionTemplate:
             16: self.get_direct_movie_num,
             17: self.get_director_cooperation_actor_list,
             18: self.get_movie_director_list,
+            19: self.get_movie_length,
         }
 
         # 连接数据库
@@ -315,6 +316,16 @@ class QuestionTemplate:
         cql = f"match (m:Movie)<-[:direct]-(c:Celebrity) where m.title='{movie_name}' return c.name"
         result = self.graph.query(cql)
         return f"《{movie_name}》的导演是" + '、'.join(result)
+
+    # 问题19：电影时长
+    def get_movie_length(self):
+        movie_name = self.get_movie_name()
+        '''
+        match (m:Movie) where m.title="鬼子来了" return m.length
+        '''
+        cql = f"match (m:Movie) where m.title='{movie_name}' return m.length"
+        result = self.graph.query(cql)
+        return f"《{movie_name}》一共{result[0]}分钟。"
 
 
 if __name__ == '__main__':

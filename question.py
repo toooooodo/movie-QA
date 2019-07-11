@@ -82,4 +82,4 @@ class Question:
 
 if __name__ == '__main__':
     q = Question()
-    print(q.process('谁导演了邪不压正'))
+    print(q.process('邪不压正的时长'))
