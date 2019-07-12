@@ -73,13 +73,13 @@ class Question:
         print(labeled_question)
         print(question_template_id_str)
         # 调用问题模板类中的获取答案的方法
-        # try:
-        answer = self.template.get_question_answer(labeled_question, question_template_id_str)
-        # except:
-        #     answer = "呜呜呜我还不知道。"
+        try:
+            answer = self.template.get_question_answer(labeled_question, question_template_id_str)
+        except:
+            answer = "呜呜呜我还不知道。"
         return answer
 
 
 if __name__ == '__main__':
     q = Question()
-    print(q.process('邪不压正的时长'))
+    print(q.process('哪些演员参演过姜文导演的电影'))
