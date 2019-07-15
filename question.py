@@ -82,4 +82,4 @@ class Question:
 
 if __name__ == '__main__':
     q = Question()
-    print(q.process('哪些演员参演过姜文导演的电影'))
+    print(q.process('姜文导演过什么类型的电影'))
