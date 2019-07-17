@@ -46,13 +46,17 @@ class QuestionClassify:
                         # 将这一行加入结果集
                         train_x.append(" ".join(word_list))
                         train_y.append(label_num)
+        print('train_x', len(train_x))
+        print('train_y', len(train_y))
         return train_x, train_y
 
     # 训练并测试模型-NB
     def train_model_NB(self):
         x_train, y_train = self.train_x, self.train_y
         self.tv = TfidfVectorizer()
+        # fit_transform 先fit，再transform
         train_data = self.tv.fit_transform(x_train).toarray()
+        print('train_data: 0', train_data[0])
         clf = MultinomialNB(alpha=0.01)
         clf.fit(train_data, y_train)
         return clf
@@ -60,7 +64,10 @@ class QuestionClassify:
     # 预测
     def predict(self, question):
         question = [" ".join(list(jb.cut(question)))]
+        print('question', question)
         test_data = self.tv.transform(question).toarray()
+        print('test_data', test_data)
+        print('predict', self.model.predict(test_data))
         y_predict = self.model.predict(test_data)[0]
         return y_predict
 
